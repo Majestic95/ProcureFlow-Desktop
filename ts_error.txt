@@ -1,0 +1,15 @@
+﻿src/app/dashboard/rfps/page.tsx(72,19): error TS2339: Property 'path' does not exist on type 'Query<DocumentData, DocumentData>'.
+src/components/proposals/proposal-detail-client.tsx(264,21): error TS2345: Argument of type '(prev: { proposal: Proposal; rfp: RFP; supplier: Supplier; } | null) => { proposal: { technicalScore: number; commercialScore: number; evaluatorComments: string; ... 8 more ...; aiSummary: string; }; rfp: RFP; supplier: Supplier; } | null' is not assignable to parameter of type 'SetStateAction<{ proposal: Proposal; rfp: RFP; supplier: Supplier; } | null>'.
+  Type '(prev: { proposal: Proposal; rfp: RFP; supplier: Supplier; } | null) => { proposal: { technicalScore: number; commercialScore: number; evaluatorComments: string; ... 8 more ...; aiSummary: string; }; rfp: RFP; supplier: Supplier; } | null' is not assignable to type '(prevState: { proposal: Proposal; rfp: RFP; supplier: Supplier; } | null) => { proposal: Proposal; rfp: RFP; supplier: Supplier; } | null'.
+    Type '{ proposal: { technicalScore: number; commercialScore: number; evaluatorComments: string; finalScore: number; status: string; id: string; rfpId: string; supplierId: string; submittedAt: Timestamp | Date; price: number; attachments: { ...; }[]; aiSummary: string; }; rfp: RFP; supplier: Supplier; } | null' is not assignable to type '{ proposal: Proposal; rfp: RFP; supplier: Supplier; } | null'.
+      Type '{ proposal: { technicalScore: number; commercialScore: number; evaluatorComments: string; finalScore: number; status: string; id: string; rfpId: string; supplierId: string; submittedAt: Timestamp | Date; price: number; attachments: { name: string; url: string; }[]; aiSummary: string; }; rfp: RFP; supplier: Supplier; }' is not assignable to type '{ proposal: Proposal; rfp: RFP; supplier: Supplier; }'.
+        The types of 'proposal.status' are incompatible between these types.
+          Type 'string' is not assignable to type '"submitted" | "underReview" | "approved" | "rejected"'.
+src/components/proposals/proposal-detail-client.tsx(409,87): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(value: string | number | Date): Date', gave the following error.
+    Argument of type 'Timestamp | Date' is not assignable to parameter of type 'string | number | Date'.
+      Type 'Timestamp' is not assignable to type 'string | number | Date'.
+        Type 'Timestamp' is missing the following properties from type 'Date': toDateString, toTimeString, toLocaleDateString, toLocaleTimeString, and 36 more.
+  Overload 2 of 4, '(value: string | number): Date', gave the following error.
+    Argument of type 'Timestamp | Date' is not assignable to parameter of type 'string | number'.
+      Type 'Timestamp' is not assignable to type 'string | number'.

@@ -1,0 +1,487 @@
+{
+  "entities": {
+    "Supplier": {
+      "title": "Supplier",
+      "description": "A supplier of goods or services.",
+      "type": "object",
+      "properties": {
+        "companyName": {
+          "type": "string",
+          "description": "The name of the supplier's company."
+        },
+        "contacts": {
+          "type": "array",
+          "description": "A list of contacts for the supplier.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The name of the contact person."
+              },
+              "role": {
+                "type": "string",
+                "description": "The role or title of the contact person."
+              },
+              "email": {
+                "type": "string",
+                "format": "email",
+                "description": "The email address of the contact."
+              },
+              "phone": {
+                "type": "string",
+                "description": "The phone number of the contact."
+              }
+            },
+            "required": ["name", "email"]
+          }
+        },
+        "address": {
+          "type": "string",
+          "description": "The physical address of the supplier."
+        },
+        "websiteUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The public website URL for the supplier."
+        },
+        "logoUrl": {
+            "type": "string",
+            "format": "uri",
+            "description": "A URL to the supplier's logo image."
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Categories of products or services the supplier provides."
+        },
+        "documents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "description": "Links to supplier-related documents."
+        },
+        "rating": {
+          "type": "number",
+          "description": "The performance rating of the supplier."
+        },
+        "estimatedRevenue": {
+          "type": "array",
+          "description": "A list of estimated yearly revenues for the supplier.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "year": {
+                "type": "number"
+              },
+              "amountUsd": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "estimatedPersonnel": {
+          "type": "array",
+          "description": "A list of estimated yearly personnel headcount for the supplier.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "year": {
+                "type": "number"
+              },
+              "headcount": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the supplier was registered."
+        }
+      },
+      "required": ["companyName", "contacts", "createdAt"]
+    },
+    "RFP": {
+      "title": "Request for Proposal (RFP)",
+      "description": "A request for proposal.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the RFP."
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed description of the RFP."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "published", "closed"],
+          "description": "The current status of the RFP."
+        },
+        "openDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date the RFP opens for submissions."
+        },
+        "closeDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date the RFP closes for submissions."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The ID of the user who created the RFP."
+        },
+        "attachedFiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "description": "Files attached to the RFP."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the RFP was created."
+        },
+        "selectedSupplierIds": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "A list of supplier IDs selected for this RFP."
+        },
+        "completedStages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of completed stages in the RFP process."
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "The ISO code for the RFP's country."
+        },
+        "stateCode": {
+          "type": "string",
+          "description": "The ISO code for the RFP's state."
+        },
+        "cityName": {
+          "type": "string",
+          "description": "The city name for the RFP."
+        }
+      },
+      "required": ["title", "description", "status", "openDate", "closeDate", "createdBy", "createdAt"]
+    },
+    "Proposal": {
+      "title": "Proposal",
+      "description": "A proposal submitted by a supplier for an RFP.",
+      "type": "object",
+      "properties": {
+        "rfpId": {
+          "type": "string",
+          "description": "The ID of the RFP this proposal is for."
+        },
+        "supplierId": {
+          "type": "string",
+          "description": "The ID of the supplier submitting the proposal."
+        },
+        "submittedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the proposal was submitted."
+        },
+        "price": {
+          "type": "number",
+          "description": "The price quoted in the proposal."
+        },
+        "technicalScore": {
+          "type": "number",
+          "description": "The technical score of the proposal."
+        },
+        "commercialScore": {
+          "type": "number",
+          "description": "The commercial score of the proposal."
+        },
+        "finalScore": {
+          "type": "number",
+          "description": "The final calculated score of the proposal."
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "description": "Files attached to the proposal."
+        },
+        "aiSummary": {
+          "type": "string",
+          "description": "The AI-generated summary of the proposal."
+        },
+        "evaluatorComments": {
+          "type": "string",
+          "description": "Comments on the proposal from a human evaluator."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["submitted", "underReview", "approved", "rejected"],
+          "description": "The status of the proposal."
+        }
+      },
+      "required": ["rfpId", "supplierId", "submittedAt", "price", "status"]
+    },
+    "Evaluation": {
+      "title": "Evaluation",
+      "description": "An evaluation of a proposal.",
+      "type": "object",
+      "properties": {
+        "proposalId": {
+          "type": "string",
+          "description": "The ID of the proposal being evaluated."
+        },
+        "evaluatorId": {
+          "type": "string",
+          "description": "The ID of the user who performed the evaluation."
+        },
+        "technicalScore": {
+          "type": "number"
+        },
+        "commercialScore": {
+          "type": "number"
+        },
+        "finalScore": {
+          "type": "number",
+          "description": "The final score of the evaluation."
+        },
+        "comments": {
+          "type": "string",
+          "description": "Comments from the evaluator."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the evaluation was created."
+        }
+      },
+      "required": ["proposalId", "evaluatorId", "finalScore", "createdAt"]
+    },
+    "Coverage": {
+      "title": "Coverage",
+      "description": "Defines a supplier's service coverage for a specific state/province.",
+      "type": "object",
+      "properties": {
+        "supplierId": {
+          "type": "string",
+          "description": "The ID of the supplier."
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "The ISO 3166-1 alpha-2 country code."
+        },
+        "countryName": {
+          "type": "string",
+          "description": "The name of the country."
+        },
+        "stateCode": {
+          "type": "string",
+          "description": "The ISO 3166-2 state/province code."
+        },
+        "stateName": {
+          "type": "string",
+          "description": "The name of the state/province."
+        },
+        "coverageStatus": {
+          "type": "string",
+          "enum": ["Preferred", "Potential", "No coverage"],
+          "description": "The coverage status for this region."
+        }
+      },
+      "required": ["supplierId", "countryCode", "stateCode", "coverageStatus"]
+    },
+    "EmailTemplate": {
+      "title": "Email Template",
+      "description": "A template for emails sent during the RFP process.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the template."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the template (e.g., RFP, Reminder, Award)."
+        },
+        "subject": {
+          "type": "string",
+          "description": "The subject line of the email."
+        },
+        "body": {
+          "type": "string",
+          "description": "The body of the email."
+        },
+        "language": {
+          "type": "string",
+          "description": "The language of the template (e.g., en-US)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the template was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time the template was last updated."
+        }
+      },
+      "required": ["name", "subject", "body", "createdAt"]
+    },
+    "Prequalification": {
+      "title": "Supplier Prequalification",
+      "description": "Stores the detailed prequalification data for a supplier.",
+      "type": "object",
+      "properties": {
+        "supplierId": { "type": "string" },
+        "legalEntityName": { "type": "string" },
+        "yearEstablished": { "type": "number" },
+        "numberOfEmployees": { "type": "number" },
+        "primaryContactName": { "type": "string" },
+        "primaryContactEmail": { "type": "string", "format": "email" },
+        "primaryContactPhone": { "type": "string" },
+        "hasHseSystem": { "type": "boolean" },
+        "hasSafetyPolicy": { "type": "boolean" },
+        "trir": {
+          "type": "array",
+          "items": { "type": "object", "properties": { "year": { "type": "number" }, "value": { "type": "number" } } }
+        },
+        "ltifr": {
+          "type": "array",
+          "items": { "type": "object", "properties": { "year": { "type": "number" }, "value": { "type": "number" } } }
+        },
+        "recordableIncidents": {
+          "type": "array",
+          "items": { "type": "object", "properties": { "year": { "type": "number" }, "value": { "type": "number" } } }
+        },
+        "fatalities": {
+          "type": "array",
+          "items": { "type": "object", "properties": { "year": { "type": "number" }, "value": { "type": "number" } } }
+        },
+        "hsePrograms": { "type": "string" },
+        "hseDocs": {
+          "type": "array",
+          "items": { "type": "object", "properties": { "name": { "type": "string" }, "url": { "type": "string", "format": "uri" } } }
+        },
+        "certifications": { "type": "array", "items": { "type": "string" } },
+        "qaQcProcess": { "type": "string" },
+        "qualityDocs": {
+          "type": "array",
+          "items": { "type": "object", "properties": { "name": { "type": "string" }, "url": { "type": "string", "format": "uri" } } }
+        },
+        "annualRevenueRange": { "type": "string", "enum": ["< 5M", "5–20M", "20–100M", "> 100M", ""] },
+        "maxContractSize": { "type": "number" },
+        "activeProjects": { "type": "number" },
+        "geographicCoverage": { "type": "string" },
+        "hasLitigation": { "type": "boolean" },
+        "litigationDetails": { "type": "string" },
+        "hasSanctions": { "type": "boolean" },
+        "sanctionsDetails": { "type": "string" },
+        "hasEthicsPolicy": { "type": "boolean" },
+        "insuranceDocs": {
+          "type": "array",
+          "items": { "type": "object", "properties": { "name": { "type": "string" }, "url": { "type": "string", "format": "uri" } } }
+        },
+        "licenseDocs": {
+          "type": "array",
+          "items": { "type": "object", "properties": { "name": { "type": "string" }, "url": { "type": "string", "format": "uri" } } }
+        },
+        "references": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "clientName": { "type": "string" },
+              "projectName": { "type": "string" },
+              "location": { "type": "string" },
+              "scope": { "type": "string" },
+              "value": { "type": "number" },
+              "year": { "type": "number" }
+            }
+          }
+        },
+        "hseRiskRating": { "type": "string", "enum": ["Low", "Medium", "High", ""] },
+        "financialRiskRating": { "type": "string", "enum": ["Low", "Medium", "High", ""] },
+        "overallPerformanceRating": { "type": "number" },
+        "internalComments": { "type": "string" },
+        "status": { "type": "string", "enum": ["Draft", "Under review", "Approved", "Rejected"] },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["supplierId", "status", "updatedAt"]
+    }
+  },
+  "auth": {
+    "providers": ["email", "microsoft.com"]
+  },
+  "firestore": {
+    "/suppliers/{supplierId}": {
+      "schema": "Supplier",
+      "description": "Stores information about each supplier."
+    },
+    "/suppliers/{supplierId}/coverage/{coverageId}": {
+      "schema": "Coverage",
+      "description": "Stores supplier coverage information for specific regions. The coverageId is typically <countryCode>_<stateCode>."
+    },
+    "/suppliers/{supplierId}/prequalifications/{prequalId}": {
+      "schema": "Prequalification",
+      "description": "Stores prequalification data for a supplier. The prequalId is typically the supplierId."
+    },
+    "/rfps/{rfpId}": {
+      "schema": "RFP",
+      "description": "Stores all requests for proposals."
+    },
+    "/proposals/{proposalId}": {
+      "schema": "Proposal",
+      "description": "Stores proposals submitted by suppliers for RFPs."
+    },
+    "/evaluations/{evaluationId}": {
+      "schema": "Evaluation",
+      "description": "Stores evaluations of proposals."
+    },
+    "/emailTemplates/{templateId}": {
+      "schema": "EmailTemplate",
+      "description": "Stores email templates used in the RFP process."
+    }
+  }
+}

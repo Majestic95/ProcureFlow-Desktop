@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+src-tauri/target/
+src-tauri/target2/
+
+# Tauri updater signing keys (NEVER commit)
+src-tauri/.tauri-updater-key
+src-tauri/.tauri-updater-key.pub
+
+# Environment files
+.env
+.env.*
+
+# Service accounts and secrets
+service-account*.json
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Backups
+backups/
+src-tauri/src-tauri/
